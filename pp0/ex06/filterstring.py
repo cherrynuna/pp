@@ -6,24 +6,24 @@ def main():
     """
     Program that prints words from a string whose length is greater than N.
     Command line usage:
-        python filterstring.py "<string>" <N>
+        python filterstring.py "<String>" <N>
     """
     try:
         if len(sys.argv) != 3:
             raise AssertionError("AssertionError: the arguments are bad")
 
-        s = sys.argv[1]
+        S = sys.argv[1]
 
         try:
-            n = int(sys.argv[2])
+            N = int(sys.argv[2])
         except ValueError:
             raise AssertionError("AssertionError: the arguments are bad")
 
         # lambda + list comprehension 사용
         result = list(
             ft_filter(
-                lambda w: len(w) > n,
-                [w for w in s.split(" ")]
+                lambda w: len(w) > N,
+                [w for w in S.split(" ")]
             )
         )
 
