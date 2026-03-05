@@ -10,7 +10,7 @@ def ft_tqdm(iterable):
         try:
             terminal_width = os.get_terminal_size().columns
         except OSError:
-            terminal_width = 80
+            terminal_width = 178
 
         percent = int(idx * 100 / total)
         percent_str = f'{percent:3}%'
