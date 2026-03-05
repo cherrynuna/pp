@@ -8,7 +8,7 @@ ft_dict = {"Hello" : "titi!"}
 ft_list[1] = "World!"
 
 # A tuple is a collection which is ordered and unchangeable.
-ft_tuple = ("Hello", "France!")
+ft_tuple = ("Hello", "S. Korea!")
 
 ft_set.remove("tutu!")
 ft_set.add("Seoul!")
