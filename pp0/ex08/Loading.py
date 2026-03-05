@@ -1,35 +1,31 @@
-from shutil import get_terminal_size
-from time import time
+import os
 
 
-def ft_tqdm(lst: range) -> None:
+def ft_tqdm(iterable):
     """
-    Custom implementation of tqdm progress bar using yield.
-
-    Args:
-        lst (range): Iterable range object.
-
-    Yields:
-        Elements from the iterable while displaying progress bar.
+    Recode of tqdm progress bar using yield.
     """
-    total = len(lst)
-    start = time()
+    total = len(iterable)
+    for idx, item in enumerate(iterable, 1):
+        try:
+            terminal_width = os.get_terminal_size().columns
+        except OSError:
+            terminal_width = 80
 
-    for i, val in enumerate(lst, 1):
-        percent = int(i / total * 100)
+        percent = int(idx * 100 / total)
+        percent_str = f'{percent:3}%'
+        curr_over_total = f' {idx}/{total}'
 
-        width = get_terminal_size().columns - 30
-        bar = int(i / total * width)
+        remain_length = terminal_width - \
+            len(percent_str) - len(curr_over_total) - 2
 
-        elapsed = time() - start
-        speed = i / elapsed if elapsed > 0 else 0
+        if remain_length < 10:
+            remain_length = 10
 
-        print(
-            f"\r{percent:3d}%|"
-            f"[{'=' * bar}{'>' if i < total else '='}"
-            f"{' ' * (width - bar)}]| "
-            f"{i}/{total} [{elapsed:.2f}s, {speed:.2f}it/s]",
-            end=""
-        )
-
-        yield val
+        bar = "█" * int((idx / total) * remain_length)
+        space = " " * (remain_length - len(bar))
+        process_bar = f'|{bar}{space}|'
+        print(f"\r{percent_str}{process_bar}{curr_over_total}",
+              end="", flush=True)
+        yield item
+    print()
