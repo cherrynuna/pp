@@ -1,7 +1,7 @@
 def NULL_not_found(object: any) -> int:
     if object is None:
         print("Nothing:", object, type(object))
-    elif isinstance(object, float) and object != object:
+    elif object != object and isinstance(object, float):
         print("Cheese:", object, type(object))
     elif object is False:
         print("Fake:", object, type(object))

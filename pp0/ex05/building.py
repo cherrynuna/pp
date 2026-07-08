@@ -16,7 +16,10 @@ def main():
 
         if len(sys.argv) == 1:
             print("What is the text to count?")
-            text = input()
+            text = sys.stdin.readline()
+            if text[-1] != "\n":
+                print()
+
         else:
             text = sys.argv[1]
 
