@@ -17,7 +17,7 @@ def main():
         if len(sys.argv) == 1:
             print("What is the text to count?")
             text = sys.stdin.readline()
-            if text[-1] != "\n":
+            if len(text) > 0 and text[-1] != "\n":
                 print()
 
         else:
@@ -33,8 +33,6 @@ def main():
         print(sum(1 for c in text if c.isspace()), "spaces")
         print(sum(1 for c in text if c.isdigit()), "digits")
 
-    except EOFError:
-        pass
     except AssertionError as ae:
         print(ae)
 
