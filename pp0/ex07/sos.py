@@ -15,7 +15,6 @@ NESTED_MORSE = {
     " ": "/ "
 }
 
-
 def main():
     """
     Convert a string argument into Morse code.
@@ -29,7 +28,7 @@ def main():
 
         text = sys.argv[1].upper()
 
-        # alphanumeric + space 체크
+        # alphanumeric + space check
         if not all(c.isalnum() or c == " " for c in text):
             raise AssertionError("AssertionError: the arguments are bad")
 

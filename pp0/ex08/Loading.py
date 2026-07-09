@@ -1,20 +1,21 @@
 import os
 
-
 def ft_tqdm(iterable):
     """
-    Recode of tqdm progress bar using yield.
+    Decorate an iterable object, returning an iterator which yields
+    the original iterable values and displays a dynamically updating
+    progressbar every time a value is requested.
     """
     total = len(iterable)
-    for idx, item in enumerate(iterable, 1):
+    for n, item in enumerate(iterable, 1):
         try:
-            terminal_width = os.get_terminal_size().columns
+            terminal_width = os.get_terminal_size().columns - 26
         except OSError:
-            terminal_width = 178
+            terminal_width = 178 - 26
 
-        percent = int(idx * 100 / total)
+        percent = int(n / total * 100)
         percent_str = f'{percent:3}%'
-        curr_over_total = f' {idx}/{total}'
+        curr_over_total = f' {n}/{total}'
 
         remain_length = terminal_width - \
             len(percent_str) - len(curr_over_total) - 2
@@ -22,10 +23,9 @@ def ft_tqdm(iterable):
         if remain_length < 10:
             remain_length = 10
 
-        bar = "█" * int((idx / total) * remain_length)
+        bar = "█" * int((n / total) * remain_length)
         space = " " * (remain_length - len(bar))
         process_bar = f'|{bar}{space}|'
         print(f"\r{percent_str}{process_bar}{curr_over_total}",
               end="", flush=True)
         yield item
-    print()
